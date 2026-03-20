@@ -13,6 +13,9 @@ const blogSchema = mongoose.Schema({
     tags: {
         type: [String]
     }
+},
+{
+    timestamps: true
 })
 
 export const Blog = mongoose.model("blog", blogSchema)

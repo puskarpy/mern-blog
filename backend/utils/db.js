@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv"
+
+dotenv.config()
 
 export const db = () => {
-    mongoose.connect(`mongodb://127.0.0.1:27017/blogs`)
+    mongoose.connect(`${process.env.MONGO_URL}/blogs`)
     .then(() => console.log("MongoDB connected."))
     .catch((e) => console.log(e))
 }
