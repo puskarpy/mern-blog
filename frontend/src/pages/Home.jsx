@@ -1,11 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useOutletContext } from 'react-router-dom'
 import {Calendar} from "lucide-react"
 import { useFetchBlog } from '../hooks/useFetchBlogs.js'
 
 export default function Home() {
 
     const {data, isLoading, isError, error} = useFetchBlog()
+    const {search, filteredArray} = useOutletContext()
 
     if (isLoading) return <p>Loading...</p>;
 
@@ -16,7 +17,7 @@ export default function Home() {
     <div className='h-full mx-auto w-full max-w-7xl px-2.5 md:px-20 py-2.5 md:py-20 bg-[#fcfcfc]'>
         <div className='grid grid-cols-3 gap-8'>
             {
-                data.data.map((b) => (
+                filteredArray.map((b) => (
                     <div key={b._id} className='rounded-lg shadow-lg border border-gray-200 p-4 flex flex-col gap-4'>
                         <div className='font-bold text-xl'>
                             {b.title}
@@ -29,7 +30,7 @@ export default function Home() {
                         </div>
                         <div className='flex gap-2'>
                             {b.tags.map((t, index) => (
-                                <span key={index} className='text-xs px-2 py-1 rounded-2xl text-gray-500 bg-gray-100'>{t}</span>
+                                <span key={index} className='text-xs font-light px-2 py-1 rounded-2xl text-gray-400 bg-gray-50 border border-gray-200'>{t}</span>
                             ))}
                         </div>
                         <div className='mt-4 text-right'>
